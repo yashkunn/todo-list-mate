@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Tag List</h1>
+  <ul>
+    {% for tag in tags %}
+      <li>{{ tag.name }}</li>
+    {% empty %}
+      <li>No tags available.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url "todo_list:index" %}">Back to Task List</a>
+{% endblock %}
