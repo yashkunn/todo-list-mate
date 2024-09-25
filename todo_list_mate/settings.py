@@ -40,12 +40,14 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "crispy_bootstrap4",
+    "debug_toolbar",
 
     "todo_list",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -129,3 +131,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
