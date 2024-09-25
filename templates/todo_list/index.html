@@ -27,7 +27,9 @@
             {% endif %}
             <br>
             <strong>Tags:</strong>
-            <span class="badge bg-secondary">{{ task.tags.first.name }}</span>
+            {% if task.tags.first %}
+              <span class="badge" style="background-color: #28a745; color: white;">{{ task.tags.first.name }}</span>
+            {% endif %}
           </div>
           <div>
             {% if task.is_done %}
@@ -53,4 +55,3 @@
     </ul>
   </div>
 {% endblock %}
-
