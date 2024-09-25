@@ -28,6 +28,12 @@
           <br>
           Deadline: {{ task.deadline }}
         {% endif %}
+        <br>
+        Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        <br>
         <a href="{% url 'todo_list:update-task' task.pk %}" class="btn btn-secondary link-to-page">Update</a>
         <a href="{% url 'todo_list:delete-task' task.pk %}" class="btn btn-danger link-to-page">Delete</a>
       </li>
