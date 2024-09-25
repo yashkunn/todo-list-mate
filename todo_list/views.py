@@ -14,4 +14,15 @@ def index(request: HttpRequest) -> HttpResponse:
 class AddTaskView(generic.CreateView):
     model = Task
     fields = ["content", "deadline"]
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("todo_list:index")
+
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    fields = ["content", "deadline", "is_done"]
+    success_url = reverse_lazy("todo_list:index")
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("todo_list:index")

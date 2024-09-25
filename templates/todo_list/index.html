@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>TODO List</h1>
-<a href="{% url 'todo_list:add-task' %}" class="btn btn-primary link-to-page">
-  Add task
-</a>
-<ul>
-  {% for task in tasks %}
-    <li>
-      {{ task.content }} -
-      {% if task.is_done %}
-        <span>Done</span>
-      {% else %}
-        <span>Not done</span>
-      {% endif %}
-      <br>
-      Created: {{ task.created_at }}
-      {% if task.deadline %}
+  <h1>TODO List</h1>
+  <a href="{% url 'todo_list:add-task' %}" class="btn btn-primary link-to-page">
+    Add task
+  </a>
+  <ul>
+    {% for task in tasks %}
+      <li>
+        {{ task.content }}
+        {% if task.is_done %}
+          <span class="text-success">Done</span>
+        {% else %}
+          <span class="text-danger">Not done</span>
+        {% endif %}
         <br>
-        Deadline: {{ task.deadline }}
-      {% endif %}
-    </li>
-  {% empty %}
-    <li>No tasks available.</li>
-  {% endfor %}
-</ul>
+        Created: {{ task.created_at }}
+        {% if task.deadline %}
+          <br>
+          Deadline: {{ task.deadline }}
+        {% endif %}
+        <a href="{% url 'todo_list:update-task' task.pk %}" class="btn btn-secondary link-to-page">Update</a>
+        <a href="{% url 'todo_list:delete-task' task.pk %}" class="btn btn-danger link-to-page">Delete</a>
+      </li>
+    {% empty %}
+      <li>No tasks available.</li>
+    {% endfor %}
+  </ul>
 {% endblock %}
