@@ -16,4 +16,4 @@ class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
-        self.fields['tags'].queryset = Tag.objects.all()
+        self.fields["tags"].queryset = Tag.objects.all()
