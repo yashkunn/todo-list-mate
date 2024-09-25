@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Todo List</title>
-</head>
-<body>
-<h1>TODO List</h1>
+{% extends "base.html" %}
 
+{% block content %}
+<h1>TODO List</h1>
+<a href="{% url 'todo_list:add-task' %}" class="btn btn-primary link-to-page">
+  Add task
+</a>
 <ul>
   {% for task in tasks %}
     <li>
@@ -26,5 +25,4 @@
     <li>No tasks available.</li>
   {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock %}

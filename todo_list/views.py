@@ -14,5 +14,4 @@ def index(request: HttpRequest) -> HttpResponse:
 class AddTaskView(generic.CreateView):
     model = Task
     fields = ["content", "deadline"]
-    template_name = "todo_list/add_task.html"
     success_url = reverse_lazy("index")
