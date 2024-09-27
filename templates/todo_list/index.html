@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>TODO List</h1>
+      <a href="{% url 'todo_list:add-task' %}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Task
+      </a>
+    </div>
+
+    <ul class="list-group">
+      {% for task in tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="mb-1">{{ task.content }}</h5>
+            {% if task.is_done %}
+              <span class="text-success">✔️ Done</span>
+            {% else %}
+              <span class="text-danger">❌ Not done</span>
+            {% endif %}
+            <br>
+            <small>Created: {{ task.created_at }}</small>
+            {% if task.deadline %}
+              <br>
+              <small class="text-danger" style="color: darkred;">Deadline: {{ task.deadline }}</small>
+            {% endif %}
+            <br>
+            <strong>Tags:</strong>
+            {% if task.tags.first %}
+              <span class="badge" style="background-color: #28a745; color: white;">{{ task.tags.first.name }}</span>
+            {% endif %}
+          </div>
+          <div>
+            {% if task.is_done %}
+              <form action="{% url 'todo_list:toggle-task' task.pk %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary btn-sm">Undo</button>
+              </form>
+            {% else %}
+              <form action="{% url 'todo_list:toggle-task' task.pk %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-sm">Complete</button>
+              </form>
+            {% endif %}
+            <div class="mt-2">
+              <a href="{% url 'todo_list:update-task' task.pk %}" class="btn btn-secondary btn-sm">Update</a>
+              <a href="{% url 'todo_list:delete-task' task.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No tasks available.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
